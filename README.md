@@ -76,3 +76,6 @@ Expectations for giving and receiving feedback:
 kk & JO - open and honest feedback.
 
 Agenda to discuss project launch: Already laid the foundation. Planned times to meet, etc. 
+
+
+link to wunderGround: https://www.wunderground.com/weather/api/d/docs?d=data/conditions
