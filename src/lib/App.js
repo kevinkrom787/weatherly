@@ -5,6 +5,8 @@ import data from './mock-data.js';
 import dataCleaner from './dataCleaner';
 import Welcome from './Welcome.js';
 import CurrentWeather from './Current-Weather.js';
+import SevenHourForecast from './Seven-Hour-Forecast';
+import keyLink from './key.js';
 
 class App extends Component {
   constructor() {
@@ -17,6 +19,13 @@ class App extends Component {
       high: '120',
       low: '-120',
       humidity: 'blah',
+      hourOne: 'one',
+      hourTwo: 'two',
+      hourThree: 'three',
+      hourFour: 'four',
+      hourFive: 'five',
+      hourSix: 'six',
+      hourSeven: 'seven',
     }
 
   }
@@ -28,8 +37,18 @@ class App extends Component {
       currentTemp: currentWeatherData.currentTemp,
       currentCondition: currentWeatherData.conditions,
       high: currentWeatherData.high,
+      low: currentWeatherData.low,
       humidity: currentWeatherData.avehumidity,
     })
+    this.getData()  
+  }
+
+  getData() {
+    fetch('http://api.wunderground.com/api/'${keyLink}'/conditions/q/CO/denver.json')
+      .then(response => response.json())
+      .then(data => dataCleaner(data))
+      .then(cleanData => console.log(cleanData))
+      .catch(david => console.log(david))
   }
 
   render() {
@@ -49,10 +68,16 @@ class App extends Component {
         currentTemp={this.state.currentTemp}
         high={this.state.high}
         low={this.state.low}
-        humidity={this.state.humidity}
-
-        />
-        <Welcome />
+        humidity={this.state.humidity}/>
+        <SevenHourForecast 
+        hourOne={this.state.hourOne}
+        hourTwo={this.state.hourTwo}
+        hourThree={this.state.hourThree}
+        hourFour={this.state.hourFour}
+        hourFive={this.state.hourFive}
+        hourSix={this.state.hourSix}
+        hourSeven={this.state.hourSeven}
+        /> 
         
       </div>
     );
