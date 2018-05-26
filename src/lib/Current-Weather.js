@@ -1,26 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
-class CurrentWeather extends Component {
-  constructor() {
-    super()
+const CurrentWeather = (props) => {
 
-  }
-
-  render(props) {
-    return (
-      <div>
-        <h3>Location: {this.props.location}</h3>
-        <h3>Current Condition: {this.props.currentCondition}</h3>
-        <h3>Current Temperature: {this.props.currentTemp}</h3>
-        <h3>Date: {this.props.day}</h3>
-        <h3>Temp: {this.props.currentTemp}</h3>
-        <h3>High: {this.props.high}</h3>
-        <h3>Low: {this.props.low}</h3>
-        <h3>Humidity: {this.props.humidity}</h3>
-    </div>
-    )
-  }
+  return (
+    <div>
+      <h3>Location: {props.forecast.location}</h3>
+      <h3>Current Condition: {props.forecast.conditions}</h3>
+      <h3>Current Temperature: {props.forecast.currentTemp}</h3>
+      <h3>Date: {props.forecast.day}</h3>
+      <h3>Temp: {props.forecast.currentTemp}</h3>
+      <h3>High: {props.forecast.high}</h3>
+      <h3>Low: {props.forecast.low}</h3>
+      <h3>Humidity: {props.forecast.avehumidity}</h3>
+  </div>
+  )
 }
 
 

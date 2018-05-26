@@ -14,11 +14,9 @@ const dataCleaner = (data) => {
     location,
     currentTemp,
   }
+
   return getInfo 
 }
 
-const cleanHourly = () => {
-
-}
 
 export default dataCleaner;
