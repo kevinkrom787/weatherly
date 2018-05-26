@@ -1,22 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Card from './Card';
 
-export default class SevenHourForecast extends Component {
-  constructor() {
-    super()
-  }
 
-  render() {
-    return(
-      <div> 
-        {/* <p>{this.props.hourOne}</p>
-        <p>{this.props.hourTwo}</p>
-        <p>{this.props.hourThree}</p>
-        <p>{this.props.hourFour}</p>
-        <p>{this.props.hourFive}</p>
-        <p>{this.props.hourSix}</p>
-        <p>{this.props.hourSeven}</p> */}
-      </div> 
-    );
-  }
+const sevenHourForecast = (props) => {
+  return (
+  props.hourly.map((hour, index) => {
+    return (<Card 
+    hour={hour.hour}
+    temp={hour.temp}
+    icon={hour.icon}
+    key={index}
+    />)
+  })
+  )
 }
 
+export default sevenHourForecast;
