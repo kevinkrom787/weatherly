@@ -13,6 +13,7 @@ const dataCleaner = (data) => {
     avehumidity: getIt.avehumidity,
     location,
     currentTemp,
+    icon: getIt.icon_url
   }
 
   return getInfo 
