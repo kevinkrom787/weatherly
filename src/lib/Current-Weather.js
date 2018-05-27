@@ -2,7 +2,7 @@ import React from 'react';
 
 
 const CurrentWeather = (props) => {
-
+console.log(props.forecast)
   return (
     <div>
       <h3>Location: {props.forecast.location}</h3>
@@ -13,6 +13,8 @@ const CurrentWeather = (props) => {
       <h3>High: {props.forecast.high}</h3>
       <h3>Low: {props.forecast.low}</h3>
       <h3>Humidity: {props.forecast.avehumidity}</h3>
+      <img src= {`${props.forecast.icon}`} />
+
   </div>
   )
 }
