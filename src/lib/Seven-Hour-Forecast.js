@@ -6,6 +6,7 @@ const sevenHourForecast = (props) => {
   return (
   props.hourly.map((hour, index) => {
     return (<Card 
+      
     hour={hour.hour}
     temp={hour.temp}
     icon={hour.icon}
