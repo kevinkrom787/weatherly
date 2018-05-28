@@ -4,7 +4,7 @@ const sevenHourForecastCleaner = (data) => {
   const sevenHourArray = [];
 
   const hourly = data.hourly_forecast
-
+  
 
   hourly.splice(1, 7).map((hour, index) => {
      sevenHourArray.push({
