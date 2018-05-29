@@ -23,9 +23,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('http://api.wunderground.com/api/`${keyLink}`//conditions/geolookup/hourly/forecast10day/q/CO/denver.json')
+    fetch(`http://api.wunderground.com/api/${keyLink}/conditions/geolookup/hourly/forecast10day/q/CO/denver.json`)
     .then(data => data.json())
-    .then(parsedData => console.log(parsedData))
+    // .then(parsedData => console.log(parsedData))
     .then(parsedData => {
         this.setState({
         currentWeather: dataCleaner(parsedData),
