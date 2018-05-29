@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import './App.css';
-// import data from './mock-data.js';
 import dataCleaner from './dataCleaner';
 import CurrentWeather from './Current-Weather.js';
 import sevenHourForecastCleaner from './sevenHourDataCleaner';
@@ -33,34 +32,26 @@ class App extends Component {
         tenDayForecast: tenDayCleaner(parsedData),
       })
     })
-    .catch(err => console.log('err-nothing came back', err))
+    .catch(err => alert('Incorrect City or State, Please Search Again'))
   }
-
-
-    // this.setState({
-    //   currentWeather: dataCleaner(data),
-    //   sevenHourForecast: sevenHourForecastCleaner(data),
-    //   tenDayForecast: tenDayCleaner(data),
-    // })
-
-
-
-  // getData() {
-  //   fetch('http://api.wunderground.com/api/81347f06b321e144/conditions/q/CO/denver.json')
-  //   .then(data => data.json())
-  //   .then(data => console.log(data))
-  //   .catch(err => console.log('err-nothing came back'))
-  // }
 
   render() {
     return (
       <div className="App">
-        <CurrentWeather 
-        forecast={this.state.currentWeather} />
-        <SevenHourForecast 
-        hourly={this.state.sevenHourForecast} />
-        <TenDayForecast
-        daily={this.state.tenDayForecast} /> 
+        <div className='currentWeather'>
+          <CurrentWeather 
+          forecast={this.state.currentWeather} />
+        </div>
+        <h1>Seven Hour Forecast</h1>
+        <div className='sevenHour'>
+          <SevenHourForecast 
+          hourly={this.state.sevenHourForecast} />
+        </div>
+        <h1>Ten Day Forecast</h1>
+        <div className='tenDay'>
+          <TenDayForecast
+          daily={this.state.tenDayForecast} />
+        </div>
       </div>
     );
   }
