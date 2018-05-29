@@ -22,10 +22,16 @@ class App extends Component {
       userState: 'CO',
       userCity: 'Denver'
     }
+    this.fetchLocationData = this.fetchLocationData.bind(this)
+
   }
 
-  componentDidMount() {
-    fetch(`http://api.wunderground.com/api/${keyLink}/conditions/geolookup/hourly/forecast10day/q/${this.state.userState}/${this.state.userCity}.json`)
+  fetchLocationData(input) {
+    console.log(input)
+    let userTime = input.split(',')
+    let city = userTime[0]
+    let state = userTime[1]
+    fetch(`http://api.wunderground.com/api/${keyLink}/conditions/geolookup/hourly/forecast10day/q/${state}/${city}.json`)
     .then(data => data.json())
     .then(parsedData => {
         this.setState({
@@ -37,10 +43,15 @@ class App extends Component {
     .catch(err => alert('Incorrect City or State, Please Search Again'))
   }
 
+  updateLocationData() {
+    
+  }
+
   render() {
     return (
       <div className="App">
-        <Search 
+        <Search
+        fetchLocationData={this.fetchLocationData} 
         />
         <div className='currentWeather'>
           <CurrentWeather 
