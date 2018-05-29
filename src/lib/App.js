@@ -10,6 +10,7 @@ import keyLink from './key.js';
 import Card from './Card';
 import TenDayForecast from './Ten-Day-Forecast';
 import tenDayCleaner from './tenDayCleaner';
+import Search from './Search.js';
 
 class App extends Component {
   constructor() {
@@ -17,14 +18,15 @@ class App extends Component {
     this.state = {
       currentWeather: {},
       sevenHourForecast: [],
-      tenDayForecast: []
+      tenDayForecast: [],
+      userState: 'CO',
+      userCity: 'Denver'
     }
   }
 
   componentDidMount() {
-    fetch(`http://api.wunderground.com/api/${keyLink}/conditions/geolookup/hourly/forecast10day/q/CO/denver.json`)
+    fetch(`http://api.wunderground.com/api/${keyLink}/conditions/geolookup/hourly/forecast10day/q/${this.state.userState}/${this.state.userCity}.json`)
     .then(data => data.json())
-    // .then(parsedData => console.log(parsedData))
     .then(parsedData => {
         this.setState({
         currentWeather: dataCleaner(parsedData),
@@ -38,6 +40,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Search 
+        />
         <div className='currentWeather'>
           <CurrentWeather 
           forecast={this.state.currentWeather} />

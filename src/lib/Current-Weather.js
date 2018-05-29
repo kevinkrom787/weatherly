@@ -14,8 +14,7 @@ const CurrentWeather = (props) => {
       <h3>Low: {props.forecast.low}</h3>
       <h3>Humidity: {props.forecast.avehumidity}</h3>
       <img src= {`${props.forecast.icon}`} />
-
-  </div>
+    </div>
   )
 }
 
