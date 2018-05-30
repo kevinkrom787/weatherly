@@ -21,6 +21,7 @@ class App extends Component {
       tenDayForecast: [],
     }
     this.fetchLocationData = this.fetchLocationData.bind(this)
+    this.setAppState = this.setAppState.bind(this);
   }
 
   sendToLocalStorage() {
@@ -36,9 +37,9 @@ class App extends Component {
 
   pullFromLocalStorage() {
     
-    let pullCurrentWeatherLocalStorage = JSON.parse(localStorage.getItem('currentWeatherKey'));
-    let pullSevenHourFromLocalStorage = JSON.parse(localStorage.getItem('sendSevenHourKey'))
-    let pullTenDayFromLocalStorage = JSON.parse(localStorage.getItem('sendTenDayKey'))
+    const pullCurrentWeatherLocalStorage = JSON.parse(localStorage.getItem('currentWeatherKey'));
+    const pullSevenHourFromLocalStorage = JSON.parse(localStorage.getItem('sendSevenHourKey'))
+    const pullTenDayFromLocalStorage = JSON.parse(localStorage.getItem('sendTenDayKey'))
 
     this.setState({
       currentWeather: pullCurrentWeatherLocalStorage,
@@ -48,6 +49,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.localStorageCheck()
+  }
+
+  localStorageCheck() {
     if (localStorage.length > 2) {
       this.pullFromLocalStorage()
     }
@@ -60,18 +65,22 @@ class App extends Component {
     fetch(`http://api.wunderground.com/api/${keyLink}/conditions/geolookup/hourly/forecast10day/q/${state}/${city}.json`)
     .then(data => data.json())
     .then(parsedData => {
-        this.setState({
-        currentWeather: dataCleaner(parsedData),
-        sevenHourForecast: sevenHourForecastCleaner(parsedData),
-        tenDayForecast: tenDayCleaner(parsedData),
-      })
+        this.setAppState(parsedData)
     })
     .then(data => this.sendToLocalStorage())
     .catch(err => alert('Incorrect City or State, Please Search Again'))
   }
 
+  setAppState(parsedData) {
+    this.setState({
+      currentWeather: dataCleaner(parsedData),
+      sevenHourForecast: sevenHourForecastCleaner(parsedData),
+      tenDayForecast: tenDayCleaner(parsedData),
+    })
+  }
+
   render() {
-    console.log(this.state)
+
     return (
       <div className='mainContainer'>
         <div className='App'>
