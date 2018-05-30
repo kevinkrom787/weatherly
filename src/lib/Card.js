@@ -1,5 +1,6 @@
 import React from 'react';
 import tenDayCleaner from './tenDayCleaner';
+import './Card.css';
 
 const Card = (props) => {
   if (props.day) {

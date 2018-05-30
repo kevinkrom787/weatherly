@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Search.css';
 
 class Search extends Component {
   constructor(props) {
@@ -18,17 +19,20 @@ class Search extends Component {
 
   render() {
     return (
-      <form onSubmit={(event) => event.preventDefault()}>
-        <h1>Your Location</h1>
-        <input 
-          type="text" 
-          value={this.state.userInput}
-          onChange={this.updateLocation}/>
+      <form className='submitForm' onSubmit={(event) => event.preventDefault()}>
+        <h1 className='yourLocation'>Check The Weather</h1>
         <input
-          type="submit" 
-          value="Submit"
-          onClick={(event) => this.props.fetchLocationData(this.state.userInput)}
-         />
+        className='weatherInput'
+        placeholder='Enter your location'
+        type='text'
+        value={this.state.userInput}
+        onChange={this.updateLocation}/>
+        <input
+        className='submitButton'
+        type="submit" 
+        value="Submit"
+        onClick={(event) => this.props.fetchLocationData(this.state.userInput)}
+        />
       </form>
   )
   }

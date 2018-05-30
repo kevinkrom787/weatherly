@@ -82,23 +82,26 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App">
-        <Search
-        fetchLocationData={this.fetchLocationData} 
-        />
-        <div className='currentWeather'>
-          <CurrentWeather 
-          forecast={this.state.currentWeather} />
-        </div>
-        <h1>Seven Hour Forecast</h1>
-        <div className='sevenHour'>
-          <SevenHourForecast 
-          hourly={this.state.sevenHourForecast} />
-        </div>
-        <h1>Ten Day Forecast</h1>
-        <div className='tenDay'>
-          <TenDayForecast
-          daily={this.state.tenDayForecast} />
+      <div className='mainContainer'>
+        <div className='App'>
+          <div className='search'>
+            <Search
+            fetchLocationData={this.fetchLocationData} />
+          </div>
+          <div className='currentWeather'>
+            <CurrentWeather 
+            forecast={this.state.currentWeather} />
+          </div>
+          <h1>Seven Hour Forecast</h1>
+          <div className='sevenHour'>
+            <SevenHourForecast 
+            hourly={this.state.sevenHourForecast} />
+          </div>
+          <h1>Ten Day Forecast</h1>
+          <div className='tenDay'>
+            <TenDayForecast
+            daily={this.state.tenDayForecast} />
+          </div>
         </div>
       </div>
     );

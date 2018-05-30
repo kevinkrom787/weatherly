@@ -1,0 +1,34 @@
+h3 {
+  margin: .4em 0 0 0;
+}
+
+.weatherInfoContain {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+.weatherInfoLeft {
+  margin: 1em;
+}
+
+.weatherInfoRight {
+  margin: 1em;
+}
+
+.location {
+  font-size: 3em;
+}
+
+.highLowTemp {
+  display: flex;
+}
+
+.currentWeatherHigh {
+  margin-right: 1em;
+}
+
+.currentWeatherIcon {
+  width: 12em;
+  height: 12em;
+}
