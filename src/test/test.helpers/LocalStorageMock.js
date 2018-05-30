@@ -2,10 +2,12 @@
 class LocalStorageMock {
   constructor() {
     this.store = {};
+    this.length = 0;
   }
 
   clear() {
     this.store = {};
+    this.length = 0;
   }
 
   getItem(key) {
@@ -14,11 +16,18 @@ class LocalStorageMock {
 
   setItem(key, value) {
     this.store[key] = value.toString();
+    this.length = this.calculateLength();
   }
 
   removeItem(key) {
     delete this.store[key];
+    this.length = this.calculateLength();
   }
+
+  calculateLength() {
+    return Object.keys(this.store).length;
+  }
+
 };
 
 

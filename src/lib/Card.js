@@ -11,14 +11,15 @@ const Card = (props) => {
         <h3>low: {props.low} </h3>
         <img src={`${props.icon}`} />
       </div>
-    )
+    );
   }
-    return (
-      <div> 
-        <h3>Hour: {props.hour} </h3> 
-        <h3>Temp: {props.temp} </h3> 
-        <img src={`${props.icon}`} />
-      </div>
-    )
-  }
+  return (
+    <div> 
+      <h3>Hour: {props.hour} </h3> 
+      <h3>Temp: {props.temp} </h3> 
+      <img src={`${props.icon}`} />
+    </div>
+  );
+}
+
 export default Card;

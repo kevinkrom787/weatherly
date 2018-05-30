@@ -1,11 +1,9 @@
 import React from 'react';
-import './Current-Weather.css';
-
+import './CurrentWeather.css';
 
 const CurrentWeather = (props) => {
   return (
     <div className='weatherInfoContain'>
-      {/*<h2>Current Weather!</h2>*/}
       <div className='weatherInfoLeft'>
         <h3 className='location'>{props.forecast.location}</h3>
         <h3>{props.forecast.conditions}</h3>
@@ -21,8 +19,7 @@ const CurrentWeather = (props) => {
         <img className='currentWeatherIcon' alt="weather picture" src= {`${props.forecast.icon}`} />
       </div>
     </div>
-  )
+  );
 }
-
 
 export default CurrentWeather; 
