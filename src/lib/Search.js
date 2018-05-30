@@ -21,13 +21,13 @@ class Search extends Component {
       <form onSubmit={(event) => event.preventDefault()}>
         <h1>Your Location</h1>
         <input 
-        type="text" 
-        value={this.state.userInput}
-        onChange={this.updateLocation}/>
+          type="text" 
+          value={this.state.userInput}
+          onChange={this.updateLocation}/>
         <input
-         type="submit" 
-         value="Submit"
-         onClick={(event) => this.props.fetchLocationData(this.state.userInput)}
+          type="submit" 
+          value="Submit"
+          onClick={(event) => this.props.fetchLocationData(this.state.userInput)}
          />
       </form>
   )
