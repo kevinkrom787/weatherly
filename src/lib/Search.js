@@ -12,7 +12,7 @@ class Search extends Component {
   
   updateLocation(event) {
     this.setState({
-     userInput: event.target.value,
+      userInput: event.target.value,
     })
     
   }
@@ -31,7 +31,7 @@ class Search extends Component {
         className='submitButton'
         type="submit" 
         value="Submit"
-        onClick={(event) => this.props.fetchLocationData(this.state.userInput)}
+        onClick={() => this.props.fetchLocationData(this.state.userInput)}
         />
       </form>
   )

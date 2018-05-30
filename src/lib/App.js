@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import './App.css';
-import dataCleaner from './dataCleaner';
-import CurrentWeather from './Current-Weather.js';
-import sevenHourForecastCleaner from './sevenHourDataCleaner';
-import SevenHourForecast from './Seven-Hour-Forecast';
-import Welcome from './Welcome.js';
 import keyLink from './key.js';
-import Card from './Card';
-import TenDayForecast from './Ten-Day-Forecast';
+import dataCleaner from './dataCleaner';
+import sevenHourForecastCleaner from './sevenHourDataCleaner';
 import tenDayCleaner from './tenDayCleaner';
+import Welcome from './Welcome.js';
+import CurrentWeather from './CurrentWeather.js';
+import SevenHourForecast from './SevenHourForecast';
+import TenDayForecast from './TenDayForecast';
+import Card from './Card';
 import Search from './Search.js';
+import './App.css';
 
 class App extends Component {
   constructor() {
@@ -31,11 +31,9 @@ class App extends Component {
     localStorage.setItem('currentWeatherKey', sendCurrentWeatherToLocal)
     localStorage.setItem('sendSevenHourKey', sendSevenHourToLocal)
     localStorage.setItem('sendTenDayKey', sendTenDayToLocal)
-
   }
 
   pullFromLocalStorage() {
-    
     const pullCurrentWeatherLocalStorage = JSON.parse(localStorage.getItem('currentWeatherKey'));
     const pullSevenHourFromLocalStorage = JSON.parse(localStorage.getItem('sendSevenHourKey'))
     const pullTenDayFromLocalStorage = JSON.parse(localStorage.getItem('sendTenDayKey'))
@@ -63,9 +61,7 @@ class App extends Component {
     let state = userTime[1]
     fetch(`http://api.wunderground.com/api/${keyLink}/conditions/geolookup/hourly/forecast10day/q/${state}/${city}.json`)
     .then(data => data.json())
-    .then(parsedData => {
-        this.setAppState(parsedData)
-    })
+    .then(parsedData => this.setAppState(parsedData))
     .then(data => this.sendToLocalStorage())
     .catch(err => alert('Incorrect City or State, Please Search Again'))
   }
@@ -79,7 +75,6 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <div className='mainContainer'>
         <div className='App'>

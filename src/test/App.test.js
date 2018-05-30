@@ -3,9 +3,9 @@ import { shallow, mount, render } from 'enzyme';
 global.localStorage = {}
 
 import App from '../lib/App';
-import CurrentWeather from '../lib/Current-Weather';
-import sevenHourForecast from '../lib/Seven-Hour-Forecast';
-import tenDayForecast from '../lib/Ten-Day-Forecast';
+import CurrentWeather from '../lib/CurrentWeather';
+import sevenHourForecast from '../lib/SevenHourForecast';
+import tenDayForecast from '../lib/TenDayForecast';
 import LocalStorageMock from '../test/test.helpers/LocalStorageMock';
 
 describe('App Test', () => {
@@ -17,8 +17,6 @@ describe('App Test', () => {
     mockLocalStorage.clear();
   });
   
-
-
   describe('App default state test', () => {
     test('App should have a default state of current weather as an empty object', () => {
       const expectedState = {
@@ -30,12 +28,7 @@ describe('App Test', () => {
 
       expect(actualState).toEqual(expectedState);
     })
-    test('App should setAppState after fetch call', () => {
-      // need to pass data from cleaners into setAppState
-      // expect state to see if correct info is there
-      // 
-      const mockData = { }
-    })
+
     test('check that when we call pullFromLocalStorage', () => {
       const expected = {
         currentWeather: { tacos: true },
@@ -54,8 +47,30 @@ describe('App Test', () => {
       // check state
     })
 
-    test('check that we call localStorageCheck', () => {
-      
+    test('check that when we call localStorageCheck, state updates', () => {
+      //setup
+      localStorage.setItem('Ryan', 'squid');
+      localStorage.setItem('Tom', 'Dog');
+      localStorage.setItem('Mark', 'Turtle');
+
+      const mockFunction = jest.fn();
+      const original = App.prototype.pullFromLocalStorage
+      App.prototype.pullFromLocalStorage = mockFunction
+      // execution
+      renderedApp.instance().localStorageCheck()
+      App.prototype.pullFromLocalStorage = original
+      //expectations
+      expect(mockFunction).toHaveBeenCalled()
+    })
+
+    test('should not run pullFromLocalStorage() if localStorage is empty', () => {
+
+      localStorage.clear()
+
+      const mockFunction = jest.fn()
+      renderedApp.instance().localStorageCheck()
+
+      expect(mockFunction).toHaveBeenCalledTimes(0)
     })
   })
 })
