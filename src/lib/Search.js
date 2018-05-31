@@ -25,8 +25,8 @@ class Search extends Component {
         className='weatherInput'
         placeholder='Enter your location'
         type='text'
-        value={this.state.userInput}
-        onChange={this.updateLocation}/>
+        value={this.state.userInput} 
+        onChange={this.updateLocation}/> 
         <input
         className='submitButton'
         type="submit" 

@@ -12,7 +12,6 @@ describe('sevenHourForecast Test', () => {
       key= '0'
     />)
   );
-
   it('should render with expected HTML tags', () => {
     const expected = 2
 

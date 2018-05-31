@@ -35,20 +35,20 @@ describe('App Test', () => {
         sevenHourForecast: { tacos: true },
         tenDayForecast: { tacos: true }
       }
-      // put info into local storage
+
       localStorage.setItem('currentWeatherKey', JSON.stringify({tacos: true}))
       localStorage.setItem('sendSevenHourKey', JSON.stringify({ tacos: true }))
       localStorage.setItem('sendTenDayKey', JSON.stringify({ tacos: true }))
-      // call function
+
       renderedApp.instance().pullFromLocalStorage()
     
       const actual = renderedApp.state()
       expect(actual).toEqual(expected)
-      // check state
+
     })
 
     test('check that when we call localStorageCheck, state updates', () => {
-      //setup
+
       localStorage.setItem('Ryan', 'squid');
       localStorage.setItem('Tom', 'Dog');
       localStorage.setItem('Mark', 'Turtle');
@@ -56,10 +56,10 @@ describe('App Test', () => {
       const mockFunction = jest.fn();
       const original = App.prototype.pullFromLocalStorage
       App.prototype.pullFromLocalStorage = mockFunction
-      // execution
+    
       renderedApp.instance().localStorageCheck()
       App.prototype.pullFromLocalStorage = original
-      //expectations
+
       expect(mockFunction).toHaveBeenCalled()
     })
 
