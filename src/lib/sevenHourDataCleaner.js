@@ -13,6 +13,7 @@ const sevenHourForecastCleaner = (data) => {
       icon: hour.icon_url,
       key: index})
   })
+  console.log(sevenHourArray)
   return sevenHourArray
 }
 

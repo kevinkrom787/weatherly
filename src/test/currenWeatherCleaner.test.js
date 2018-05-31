@@ -1,8 +1,8 @@
 import data from '../lib/mock-data';
 import dataCleaner from '../lib/dataCleaner';
 
-describe('dataCleaner test', () => {
-  it('should take in data as an argument', () => {
+describe('currentWeatherDataCleaner test', () => {
+  it('should take in API data as an argument and return an object literal', () => {
     const expected = {
       high: '51',
       low: '32',
