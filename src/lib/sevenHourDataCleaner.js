@@ -8,10 +8,10 @@ const sevenHourForecastCleaner = (data) => {
 
   hourly.splice(1, 7).map((hour, index) => {
      sevenHourArray.push({
-      hour: hour.FCTTIME.civil, 
-      temp: hour.temp.english,
-      icon: hour.icon_url,
-      key: index})
+        hour: hour.FCTTIME.civil, 
+        temp: hour.temp.english,
+        icon: hour.icon_url,
+        key: index})
   })
   return sevenHourArray
 }

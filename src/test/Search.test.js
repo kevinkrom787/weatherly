@@ -4,7 +4,7 @@ import Search from '../lib/Search.js';
 
 describe('Search Test', () => {
 
-  it('should instanticate an new Search component', () => {
+  it('should instantiate an new Search component', () => {
     expect(null).toEqual(null);
   });
 

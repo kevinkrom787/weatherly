@@ -13,11 +13,12 @@ describe('sevenHourForecast Test', () => {
     />)
   );
 
-  it('should render with expected HTML tags', () => {
+  it('Should create a card formated for hourly forecast', () => {
     const expected = 2
 
     const actual = renderedSevenHourForecast.find('h3').length
 
     expect(actual).toEqual(expected);
   });
+  
 });
