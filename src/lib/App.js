@@ -50,7 +50,8 @@ class App extends Component {
   }
 
   localStorageCheck() {
-    if (localStorage.length > 2) {
+    let doesLocalStorageHaveKeysInside = localStorage.length > 2;
+    if (doesLocalStorageHaveKeysInside) {
       this.pullFromLocalStorage()
     }
   }
