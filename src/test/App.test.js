@@ -29,6 +29,40 @@ describe('App Test', () => {
       expect(actualState).toEqual(expectedState);
     })
 
+    it('check that when we call pullFromLocalStorage and set state', () => {
+      // setup
+      renderedApp.setState({
+        currentWeather: { key: 'tacos'},
+        sevenHourForecast: { key: 'Banana'},
+        tenDayForecast: { key: 'pizza'}
+      })
+      
+
+      renderedApp.instance().pullFromLocalStorage()
+     
+      const expected = {
+        currentWeather: { key: 'tacos' },
+        sevenHourForecast: { key: 'Banana' },
+        tenDayForecast: { key: 'pizza' }
+      }
+      
+    
+      const currentWeatherFromStorage = mockLocalStorage.setItem('currentWeather', JSON.stringify({ key: 'tacos' }))
+      const sevenHourForecast = mockLocalStorage.setItem('sevenHourForecast', JSON.stringify({ key: 'Banana' }))    
+      const tenDayForecast = mockLocalStorage.setItem('tenDayForecast', JSON.stringify({ key: 'pizza' }))    
+    
+      renderedApp.instance().setAllForecasts(currentWeatherFromStorage, sevenHourForecast, tenDayForecast)
+   
+      const currentWeatherParsed = JSON.parse(mockLocalStorage.getItem('currentWeather'))
+      const sevenDayParsed = JSON.parse(mockLocalStorage.getItem('sevenHourForecast'))
+      const tenDayParsed = JSON.parse(mockLocalStorage.getItem('tenDayForecast'))
+      
+      
+      expect(currentWeatherParsed).toEqual(expected.currentWeather)
+      expect(sevenDayParsed).toEqual(expected.sevenHourForecast)
+      expect(tenDayParsed).toEqual(expected.tenDayForecast)
+    })
+
     it('check that when we call localStorageCheck, state updates', () => {
 
       localStorage.setItem('Ryan', 'squid');
