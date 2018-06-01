@@ -28,6 +28,7 @@ class LocalStorageMock {
     return Object.keys(this.store).length;
   }
 
+
 };
 
 

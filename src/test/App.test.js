@@ -18,7 +18,7 @@ describe('App Test', () => {
   });
   
   describe('App default state test', () => {
-    test('App should have a default state of current weather as an empty object', () => {
+    it('App should have a default state of current weather as an empty object', () => {
       const expectedState = {
         currentWeather: {},
         sevenHourForecast: [],
@@ -29,25 +29,28 @@ describe('App Test', () => {
       expect(actualState).toEqual(expectedState);
     })
 
-    test('check that when we call pullFromLocalStorage', () => {
+    it('check that when we call pullFromLocalStorage', () => {
+    
+      const key1 = mockLocalStorage.setItem('key1', JSON.stringify({ tacos: true }))    
+      const key2 = mockLocalStorage.setItem('key2', JSON.stringify({ tacos: true }))    
+      const key3 = mockLocalStorage.setItem('key3', JSON.stringify({ tacos: true }))    
+
       const expected = {
         currentWeather: { tacos: true },
         sevenHourForecast: { tacos: true },
         tenDayForecast: { tacos: true }
       }
 
-      localStorage.setItem('currentWeatherKey', JSON.stringify({tacos: true}))
-      localStorage.setItem('sendSevenHourKey', JSON.stringify({ tacos: true }))
-      localStorage.setItem('sendTenDayKey', JSON.stringify({ tacos: true }))
-
       renderedApp.instance().pullFromLocalStorage()
-    
-      const actual = renderedApp.state()
-      expect(actual).toEqual(expected)
+      renderedApp.instance().setAllForecasts(key1, key2, key3)
 
+      
+      const actual = renderedApp.state()
+  
+      expect(actual).toEqual(expected)
     })
 
-    test('check that when we call localStorageCheck, state updates', () => {
+    it('check that when we call localStorageCheck, state updates', () => {
 
       localStorage.setItem('Ryan', 'squid');
       localStorage.setItem('Tom', 'Dog');
@@ -63,7 +66,7 @@ describe('App Test', () => {
       expect(mockFunction).toHaveBeenCalled()
     })
 
-    test('should not run pullFromLocalStorage() if localStorage is empty', () => {
+    it('should not run pullFromLocalStorage() if localStorage is empty', () => {
 
       localStorage.clear()
 

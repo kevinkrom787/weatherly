@@ -19,18 +19,19 @@ class App extends Component {
       sevenHourForecast: [],
       tenDayForecast: [],
     }
+    this.setAllForecasts = this.setAllForecasts.bind(this)
     this.fetchLocationData = this.fetchLocationData.bind(this)
     this.setAppState = this.setAppState.bind(this);
   }
 
-  sendToLocalStorage() {
-    let sendCurrentWeatherToLocal = JSON.stringify(this.state.currentWeather)
+  sendToLocalStorage(input) {
+    let userLocationStorage = JSON.stringify(input)
     let sendSevenHourToLocal = JSON.stringify(this.state.sevenHourForecast)
-    let sendTenDayToLocal = JSON.stringify(this.state.tenDayForecast)
 
-    localStorage.setItem('currentWeatherKey', sendCurrentWeatherToLocal)
+
+    localStorage.setItem('input', userLocationStorage)
     localStorage.setItem('sendSevenHourKey', sendSevenHourToLocal)
-    localStorage.setItem('sendTenDayKey', sendTenDayToLocal)
+
   }
 
   pullFromLocalStorage() {
@@ -38,11 +39,9 @@ class App extends Component {
     const pullSevenHourFromLocalStorage = JSON.parse(localStorage.getItem('sendSevenHourKey'))
     const pullTenDayFromLocalStorage = JSON.parse(localStorage.getItem('sendTenDayKey'))
 
-    this.setState({
-      currentWeather: pullCurrentWeatherLocalStorage,
-      sevenHourForecast: pullSevenHourFromLocalStorage,
-      tenDayForecast: pullTenDayFromLocalStorage
-    })
+
+    this.setAllForecasts(pullCurrentWeatherLocalStorage, pullSevenHourFromLocalStorage, pullTenDayFromLocalStorage)
+    
   }
 
   componentDidMount() {
@@ -50,20 +49,23 @@ class App extends Component {
   }
 
   localStorageCheck() {
-    let doesLocalStorageHaveKeysInside = localStorage.length > 2;
+    let doesLocalStorageHaveKeysInside = localStorage.length >= 1;
     if (doesLocalStorageHaveKeysInside) {
       this.pullFromLocalStorage()
     }
   }
 
   fetchLocationData(input) {
+    console.log(input)
     let userTime = input.split(',')
     let city = userTime[0]
     let state = userTime[1]
     fetch(`http://api.wunderground.com/api/${keyLink}/conditions/geolookup/hourly/forecast10day/q/${state}/${city}.json`)
     .then(data => data.json())
-    .then(parsedData => this.setAppState(parsedData))
-    .then(data => this.sendToLocalStorage())
+    .then(parsedData => {
+      this.setAppState(parsedData)
+      this.sendToLocalStorage(input)
+    })
     .catch(err => alert('Incorrect City or State, Please Search Again'))
   }
 
@@ -72,6 +74,14 @@ class App extends Component {
       currentWeather: dataCleaner(parsedData),
       sevenHourForecast: sevenHourForecastCleaner(parsedData),
       tenDayForecast: tenDayCleaner(parsedData),
+    })
+  }
+
+  setAllForecasts(currentWeather, sevenHourForecast, tenDayForecast) {
+    this.setState({
+      currentWeather,
+      sevenHourForecast,
+      tenDayForecast
     })
   }
 
