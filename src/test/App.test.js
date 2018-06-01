@@ -29,27 +29,6 @@ describe('App Test', () => {
       expect(actualState).toEqual(expectedState);
     })
 
-    it('check that when we call pullFromLocalStorage', () => {
-    
-      const key1 = mockLocalStorage.setItem('key1', JSON.stringify({ tacos: true }))    
-      const key2 = mockLocalStorage.setItem('key2', JSON.stringify({ tacos: true }))    
-      const key3 = mockLocalStorage.setItem('key3', JSON.stringify({ tacos: true }))    
-
-      const expected = {
-        currentWeather: { tacos: true },
-        sevenHourForecast: { tacos: true },
-        tenDayForecast: { tacos: true }
-      }
-
-      renderedApp.instance().pullFromLocalStorage()
-      renderedApp.instance().setAllForecasts(key1, key2, key3)
-
-      
-      const actual = renderedApp.state()
-  
-      expect(actual).toEqual(expected)
-    })
-
     it('check that when we call localStorageCheck, state updates', () => {
 
       localStorage.setItem('Ryan', 'squid');
@@ -74,6 +53,30 @@ describe('App Test', () => {
       renderedApp.instance().localStorageCheck()
 
       expect(mockFunction).toHaveBeenCalledTimes(0)
+    })
+    it('sendToLocalStorage should store state in localStorage', () => {
+      //setup - set state in rendered App
+      renderedApp.setState({
+        currentWeather: {key: 'tacos'},
+        sevenHourForecast: {key: 'Breakfast ritos'},
+        tenDayForecast: {key: 'apple'}
+      })
+      // invoke function we are testing
+      renderedApp.instance().sendToLocalStorage()
+      // what are we expecting
+      const expected = ({
+        currentWeather: {key: 'tacos'},
+        sevenHourForecast: {key: 'Breakfast ritos'},
+        tenDayForecast: {key: 'apple'}
+      })
+      // getting and parsing our item from localStorage
+      const currentWeatherFromStorage = JSON.parse(mockLocalStorage.getItem('currentWeather'))
+      const sevenHourForecastFromStorage = JSON.parse(mockLocalStorage.getItem('sevenHourForecast'))
+      const tenDayForecastFromStorage = JSON.parse(mockLocalStorage.getItem('tenDayForecast'))
+      // asserting 
+      expect(currentWeatherFromStorage).toEqual(expected.currentWeather)
+      expect(sevenHourForecastFromStorage).toEqual(expected.sevenHourForecast)
+      expect(tenDayForecastFromStorage).toEqual(expected.tenDayForecast)
     })
   })
 })

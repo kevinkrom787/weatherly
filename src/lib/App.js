@@ -24,21 +24,22 @@ class App extends Component {
     this.setAppState = this.setAppState.bind(this);
   }
 
-  sendToLocalStorage(input) {
-    let userLocationStorage = JSON.stringify(input)
+  sendToLocalStorage() {
+    let userLocationStorage = JSON.stringify(this.state.currentWeather)
     let sendSevenHourToLocal = JSON.stringify(this.state.sevenHourForecast)
+    let sendTenDayToLocal = JSON.stringify(this.state.tenDayForecast)
 
-
-    localStorage.setItem('input', userLocationStorage)
-    localStorage.setItem('sendSevenHourKey', sendSevenHourToLocal)
+    localStorage.setItem('currentWeather', userLocationStorage)
+    localStorage.setItem('sevenHourForecast', sendSevenHourToLocal)
+    localStorage.setItem('tenDayForecast', sendTenDayToLocal)
 
   }
 
   pullFromLocalStorage() {
-    const pullCurrentWeatherLocalStorage = JSON.parse(localStorage.getItem('currentWeatherKey'));
-    const pullSevenHourFromLocalStorage = JSON.parse(localStorage.getItem('sendSevenHourKey'))
-    const pullTenDayFromLocalStorage = JSON.parse(localStorage.getItem('sendTenDayKey'))
-
+    const pullCurrentWeatherLocalStorage = JSON.parse(localStorage.getItem('currentWeather'));
+    const pullSevenHourFromLocalStorage = JSON.parse(localStorage.getItem('sevenHourForecast'))
+    const pullTenDayFromLocalStorage = JSON.parse(localStorage.getItem('sendTenDayForecast'))
+    
 
     this.setAllForecasts(pullCurrentWeatherLocalStorage, pullSevenHourFromLocalStorage, pullTenDayFromLocalStorage)
     
